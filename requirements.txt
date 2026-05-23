@@ -1,0 +1,10 @@
+fastapi
+uvicorn
+transformers
+torch
+scipy
+numpy
+sentencepiece
+protobuf
+noisereduce
+tiktoken

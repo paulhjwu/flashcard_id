@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Indonesian Flashcards</title>
+    <link rel="stylesheet" href="src/styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>🇮🇩 Indonesian Flashcards</h1>
+        <div class="cue-word-section">
+            <label for="cueWordInput">📝 Cue Word</label>
+            <input type="text" id="cueWordInput" class="api-key-input"
+                   placeholder="Type a word to use as cue"
+                   oninput="handleCueWordInput(this.value)">
+            <div id="cueWordError" class="cue-word-error"></div>
+        </div>
+        <div id="flashcard">
+            <div class="loading">Loading flashcards...</div>
+        </div>
+        <div id="diagnostics"></div>
+    </div>
+
+    <script src="src/app.js"></script>
+</body>
+</html>

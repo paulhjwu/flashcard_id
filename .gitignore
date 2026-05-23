@@ -1,0 +1,5 @@
+node_modules/
+.env
+.venv/
+models/
+indonesian_audio/
