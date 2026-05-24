@@ -63,6 +63,54 @@ function getAudioFilename(indonesianText) {
     return 'indonesian_audio/' + indonesianText.replace(/ /g, '_') + '.mp3';
 }
 
+async function generateAndStoreWordAudio(indonesianText) {
+    const apiKey = getGeminiKey();
+    if (!apiKey) {
+        throw new Error('GEMINI_API_KEY is not set in .env');
+    }
+    if (!window.electronAudio?.saveAudioFile) {
+        throw new Error('Electron audio bridge is unavailable');
+    }
+
+    const ttsResponse = await fetch(
+        `https://texttospeech.googleapis.com/v1/text:synthesize?key=${encodeURIComponent(apiKey)}`,
+        {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                input: { text: indonesianText },
+                voice: {
+                    languageCode: 'id-ID',
+                    name: 'id-ID-Wavenet-A'
+                },
+                audioConfig: {
+                    audioEncoding: 'MP3'
+                }
+            })
+        }
+    );
+
+    if (!ttsResponse.ok) {
+        const errData = await ttsResponse.json().catch(() => null);
+        throw new Error(errData?.error?.message || `Google TTS HTTP ${ttsResponse.status}`);
+    }
+
+    const ttsData = await ttsResponse.json();
+    if (!ttsData?.audioContent) {
+        throw new Error('Google TTS returned no audio data');
+    }
+
+    const binary = atob(ttsData.audioContent);
+    const bytes = new Uint8Array(binary.length);
+    for (let i = 0; i < binary.length; i++) {
+        bytes[i] = binary.charCodeAt(i);
+    }
+
+    const audioFile = getAudioFilename(indonesianText);
+    await window.electronAudio.saveAudioFile(audioFile, Array.from(bytes));
+    return audioFile;
+}
+
 function getRandomWord() {
     return words[Math.floor(Math.random() * words.length)];
 }
@@ -70,22 +118,22 @@ function getRandomWord() {
 function playAudio() {
     if (!currentWord) return;
 
-    const audioFile = getAudioFilename(currentWord.indonesian);
+    const initialAudioFile = getAudioFilename(currentWord.indonesian);
 
     if (audio) {
         audio.pause();
         audio.currentTime = 0;
     }
 
-    fetch(audioFile, { method: 'HEAD' })
-        .then(response => {
-            if (!response.ok) {
-                throw new Error(
-                    `Audio file not found: ${audioFile}\n\nTroubleshooting:\n` +
-                    `- Verify indonesian_audio folder is in the same directory\n` +
-                    `- Check that ${currentWord.indonesian.replace(/ /g, '_')}.mp3 exists`
-                );
+    fetch(initialAudioFile, { method: 'HEAD' })
+        .then(async response => {
+            if (response.ok) {
+                return initialAudioFile;
             }
+            console.warn(`Audio missing for ${currentWord.indonesian}. Generating and caching...`);
+            return await generateAndStoreWordAudio(currentWord.indonesian);
+        })
+        .then(audioFile => {
             audio = new Audio(audioFile);
             audio.onerror = (e) => {
                 console.error('Audio error:', e);
@@ -96,7 +144,7 @@ function playAudio() {
         .then(() => showTranslation())
         .catch(error => {
             console.error('Error:', error);
-            alert(error.message || 'Error playing audio. Make sure the audio file exists.');
+            alert(error.message || 'Error playing audio.');
             showTranslation();
         });
 }
@@ -125,10 +173,11 @@ async function generateSentence() {
         sentenceDiv.classList.add('show');
     }
 
-    const otherWords = words
-        .filter(w => w.indonesian !== currentWord.indonesian)
+    const contextWordTarget = 100;
+    const availableContextWords = words.filter(w => w.indonesian !== currentWord.indonesian);
+    const otherWords = availableContextWords
         .sort(() => Math.random() - 0.5)
-        .slice(0, 5)
+        .slice(0, Math.min(contextWordTarget, availableContextWords.length))
         .map(w => w.indonesian);
 
     const prompt = `Create a simple Indonesian sentence using the word "${currentWord.indonesian}".
