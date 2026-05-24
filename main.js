@@ -39,6 +39,16 @@ app.on('window-all-closed', () => {
     if (process.platform !== 'darwin') app.quit();
 });
 
+ipcMain.handle('check-audio-dir', async () => {
+    const audioDir = path.join(__dirname, 'indonesian_audio');
+    try {
+        const stat = await fs.promises.stat(audioDir);
+        return { exists: stat.isDirectory() };
+    } catch {
+        return { exists: false };
+    }
+});
+
 ipcMain.handle('generate-tts-bytes', async (_, { text, speakingRate }) => {
     if (typeof text !== 'string' || !text.trim()) throw new Error('Invalid TTS text');
 

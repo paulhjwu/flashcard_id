@@ -8,23 +8,14 @@ function getGeminiKey() {
 
 
 async function testAudioAccess() {
-    const audioPath = `indonesian_audio/ada.mp3`;
-    try {
-        const response = await fetch(audioPath, { method: 'HEAD' });
-        if (response.ok) {
-            return { success: true, message: '✅ Audio files are accessible!' };
-        } else {
-            return {
-                success: false,
-                message: `❌ Cannot access audio files (Status: ${response.status})\n\nPlease ensure:\n1. flashcard.html is in the same directory as indonesian_audio/\n2. You're using a web server (http://), not opening the file directly (file://)\n3. Current page URL: ${window.location.href}`
-            };
-        }
-    } catch (error) {
-        return {
-            success: false,
-            message: `❌ Error accessing audio: ${error.message}\n\nMake sure you're running a local web server.`
-        };
+    if (!window.electronAudio?.checkAudioDir) {
+        return { success: false, message: '❌ Cannot check audio directory: IPC bridge unavailable.' };
     }
+    const { exists } = await window.electronAudio.checkAudioDir();
+    if (exists) {
+        return { success: true, message: '✅ Audio files are accessible!' };
+    }
+    return { success: false, message: '❌ The indonesian_audio directory was not found. Make sure it exists next to flashcard.html.' };
 }
 
 async function showDiagnostics() {
@@ -254,7 +245,7 @@ async function speakSentence(sentence) {
 
 async function speakSentenceSlow(sentence) {
     if (!sentence) return;
-    await speakWithGoogleTTS(sentence, 0.7);
+    await speakWithGoogleTTS(sentence, 0.5);
 }
 
 async function speakWithGoogleTTS(sentence, rate) {
