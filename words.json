@@ -1,5 +1,381 @@
 [
   {
+    "indonesian": "merawat",
+    "english": ["to care for", "to look after", "tended"]
+  },
+  {
+    "indonesian": "merusak",
+    "english": ["spoiled", "damages", "damage"]
+  },
+  {
+    "indonesian": "menyanyi",
+    "english": ["sings", "sing", "singing"]
+  },
+  {
+    "indonesian": "menyala",
+    "english": ["is lit", "alight", "ignite"]
+  },
+  {
+    "indonesian": "mengirim",
+    "english": ["sent", "sends", "sending"]
+  },
+  {
+    "indonesian": "mengejar",
+    "english": ["went after", "chase", "chasing"]
+  },
+  {
+    "indonesian": "mengandung",
+    "english": ["contains", "have", "has"]
+  },
+  {
+    "indonesian": "menyentuh",
+    "english": ["touch", "touched", "reached"]
+  },
+  {
+    "indonesian": "menyapu",
+    "english": ["sweeps", "sweeping", "sweep"]
+  },
+  {
+    "indonesian": "menyimpan",
+    "english": ["kept", "keeping", "keeps"]
+  },
+  {
+    "indonesian": "menyusun",
+    "english": ["arranging", "arrange", "arranges"]
+  },
+  {
+    "indonesian": "menyewa",
+    "english": ["rented", "hiring", "renting"]
+  },
+  {
+    "indonesian": "menyapa",
+    "english": ["greet", "greets", "say"]
+  },
+  {
+    "indonesian": "mengganti",
+    "english": ["switch", "changed", "replace"]
+  },
+  {
+    "indonesian": "menghadap",
+    "english": ["face", "facing", "faces"]
+  },
+  {
+    "indonesian": "menghilang",
+    "english": ["disappearing", "vanish", "disappears"]
+  },
+  {
+    "indonesian": "menggali",
+    "english": ["digs", "digging", "dig"]
+  },
+  {
+    "indonesian": "mengganggu",
+    "english": ["interrupt", "bothering", "bothered"]
+  },
+  {
+    "indonesian": "menggambar",
+    "english": ["drew", "to draw", "drawing"]
+  },
+  {
+    "indonesian": "mengingat",
+    "english": ["remember", "remembering", "remembers"]
+  },
+  {
+    "indonesian": "mengajar",
+    "english": ["teach", "teaches", "teaching"]
+  },
+  {
+    "indonesian": "mengisi",
+    "english": ["filling", "fill", "charging"]
+  },
+  {
+    "indonesian": "mengambil",
+    "english": ["make", "picking", "takes"]
+  },
+  {
+    "indonesian": "mengerti",
+    "english": ["understand", "understands", "understood"]
+  },
+  {
+    "indonesian": "mengubah",
+    "english": ["turned", "changed", "change"]
+  },
+  {
+    "indonesian": "ribuan",
+    "english": ["thousands"]
+  },
+  {
+    "indonesian": "puluhan",
+    "english": ["tens"]
+  },
+  {
+    "indonesian": "ratusan",
+    "english": ["hundreds"]
+  },
+  {
+    "indonesian": "kedua",
+    "english": ["both", "second", "two"]
+  },
+  {
+    "indonesian": "semiliar",
+    "english": ["a billion", "one billion"]
+  },
+  {
+    "indonesian": "pertama",
+    "english": ["first", "sight", "the first"]
+  },
+  {
+    "indonesian": "sekali",
+    "english": ["so", "really", "once"]
+  },
+  {
+    "indonesian": "miliar",
+    "english": ["billion", "billions"]
+  },
+  {
+    "indonesian": "ketiga",
+    "english": ["third"]
+  },
+  {
+    "indonesian": "ribu",
+    "english": ["thousand", "thousands"]
+  },
+  {
+    "indonesian": "seratus",
+    "english": ["hundred", "one hundred", "a hundred"]
+  },
+  {
+    "indonesian": "seribu",
+    "english": ["one thousand"]
+  },
+  {
+    "indonesian": "persen",
+    "english": ["percents", "percent", "percentage"]
+  },
+  {
+    "indonesian": "ratus",
+    "english": ["hundred"]
+  },
+  {
+    "indonesian": "juta",
+    "english": ["millions", "million", "millionth"]
+  },
+  {
+    "indonesian": "sejuta",
+    "english": ["a million", "one million"]
+  },
+  {
+    "indonesian": "kali",
+    "english": ["time", "times", "multiplied"]
+  },
+  {
+    "indonesian": "selusin",
+    "english": ["a dozen"]
+  },
+  {
+    "indonesian": "puluh",
+    "english": ["thirty", "tens"]
+  },
+  {
+    "indonesian": "lusin",
+    "english": ["dozen", "dozens"]
+  },
+  {
+    "indonesian": "sebelas",
+    "english": ["eleven"]
+  },
+  {
+    "indonesian": "belas",
+    "english": ["nineteen", "twelve", "fifteen"]
+  },
+  {
+    "indonesian": "sembilan",
+    "english": ["nine", "ninth"]
+  },
+  {
+    "indonesian": "delapan",
+    "english": ["eight"]
+  },
+  {
+    "indonesian": "tujuh",
+    "english": ["seven", "seventh"]
+  },
+  {
+    "indonesian": "jumlah",
+    "english": ["number", "sum", "amount"]
+  },
+  {
+    "indonesian": "lima",
+    "english": ["five", "lima"]
+  },
+  {
+    "indonesian": "enam",
+    "english": ["six"]
+  },
+  {
+    "indonesian": "kurang",
+    "english": ["minus", "less", "lack"]
+  },
+  {
+    "indonesian": "nomor",
+    "english": ["number", "numbers"]
+  },
+  {
+    "indonesian": "sama",
+    "english": ["same", "equal", "equally"]
+  },
+  {
+    "indonesian": "tambah",
+    "english": ["plus", "add"]
+  },
+  {
+    "indonesian": "empat",
+    "english": ["four"]
+  },
+  {
+    "indonesian": "nol",
+    "english": ["zero"]
+  },
+  {
+    "indonesian": "dua",
+    "english": ["two", "2", "second"]
+  },
+  {
+    "indonesian": "satu",
+    "english": ["an", "a", "1st"]
+  },
+  {
+    "indonesian": "tiga",
+    "english": ["three"]
+  },
+  {
+    "indonesian": "lain",
+    "english": ["other", "another", "else"]
+  },
+  {
+    "indonesian": "sedih",
+    "english": ["sorry", "sad"]
+  },
+  {
+    "indonesian": "bahagia",
+    "english": ["happy", "merry"]
+  },
+  {
+    "indonesian": "mirip",
+    "english": ["similar", "look like", "looks like"]
+  },
+  {
+    "indonesian": "penuh",
+    "english": ["full", "whole"]
+  },
+  {
+    "indonesian": "biasa",
+    "english": ["normal", "average", "ordinary"]
+  },
+  {
+    "indonesian": "pintar",
+    "english": ["smart", "bright", "clever"]
+  },
+  {
+    "indonesian": "mudah",
+    "english": ["easy", "simple", "convenient"]
+  },
+  {
+    "indonesian": "bodoh",
+    "english": ["stupid", "dumb", "fool"]
+  },
+  {
+    "indonesian": "rusak",
+    "english": ["broken", "damaged", "out of order"]
+  },
+  {
+    "indonesian": "sulit",
+    "english": ["difficult", "hard", "tough"]
+  },
+  {
+    "indonesian": "sempurna",
+    "english": ["perfectly", "perfect"]
+  },
+  {
+    "indonesian": "kotor",
+    "english": ["dirty"]
+  },
+  {
+    "indonesian": "bersih",
+    "english": ["clean"]
+  },
+  {
+    "indonesian": "dekat",
+    "english": ["near", "close", "by"]
+  },
+  {
+    "indonesian": "jelas",
+    "english": ["obviously", "clear", "obvious"]
+  },
+  {
+    "indonesian": "jauh",
+    "english": ["away", "far", "afar"]
+  },
+  {
+    "indonesian": "miskin",
+    "english": ["poor"]
+  },
+  {
+    "indonesian": "panjang",
+    "english": ["long", "length", "long's"]
+  },
+  {
+    "indonesian": "muda",
+    "english": ["light", "young", "youth"]
+  },
+  {
+    "indonesian": "tua",
+    "english": ["are old", "is old", "were old"]
+  },
+  {
+    "indonesian": "jelek",
+    "english": ["is ugly", "bad", "ugly"]
+  },
+  {
+    "indonesian": "pendek",
+    "english": ["short"]
+  },
+  {
+    "indonesian": "tinggi",
+    "english": ["height", "tall", "high"]
+  },
+  {
+    "indonesian": "cantik",
+    "english": ["beauty", "beautiful", "pretty"]
+  },
+  {
+    "indonesian": "banyak",
+    "english": ["lots", "many", "plenty"]
+  },
+  {
+    "indonesian": "sedikit",
+    "english": ["slightly", "little", "few"]
+  },
+  {
+    "indonesian": "hangat",
+    "english": ["warm"]
+  },
+  {
+    "indonesian": "baru",
+    "english": ["only", "new", "recent"]
+  },
+  {
+    "indonesian": "kecil",
+    "english": ["little", "tiny", "minor"]
+  },
+  {
+    "indonesian": "betul",
+    "english": ["correct", "true", "right"]
+  },
+  {
+    "indonesian": "dingin",
+    "english": ["cold"]
+  },
+  {
     "indonesian": "menurut",
     "english": ["follow", "obey", "think"]
   },
@@ -198,5 +574,773 @@
   {
     "indonesian": "bermain",
     "english": ["playing", "play", "played"]
+  },
+  {
+    "indonesian": "berharap",
+    "english": ["hoped", "wishes", "expects"]
+  },
+  {
+    "indonesian": "bersama",
+    "english": ["with", "along", "together"]
+  },
+  {
+    "indonesian": "bergerak",
+    "english": ["move", "moving", "moves"]
+  },
+  {
+    "indonesian": "belajar",
+    "english": ["learns", "studied", "learn"]
+  },
+  {
+    "indonesian": "berkumpul",
+    "english": ["get together", "gather", "gathering"]
+  },
+  {
+    "indonesian": "berlaku",
+    "english": ["valid", "counts", "apply"]
+  },
+  {
+    "indonesian": "berkunjung",
+    "english": ["visit", "visits"]
+  },
+  {
+    "indonesian": "bekerja",
+    "english": ["work", "working", "works"]
+  },
+  {
+    "indonesian": "berkembang",
+    "english": ["progressing", "flourish", "in progress"]
+  },
+  {
+    "indonesian": "berbicara",
+    "english": ["speak", "talking", "talk"]
+  },
+  {
+    "indonesian": "bersaing",
+    "english": ["competing", "compete", "competes"]
+  },
+  {
+    "indonesian": "bertemu",
+    "english": ["encounters", "meeting", "see"]
+  },
+  {
+    "indonesian": "berubah",
+    "english": ["changed", "change", "turned"]
+  },
+  {
+    "indonesian": "berangkat",
+    "english": ["leave for", "left", "go"]
+  },
+  {
+    "indonesian": "berdiri",
+    "english": ["stand", "stands up", "stands"]
+  },
+  {
+    "indonesian": "berhenti",
+    "english": ["ends", "stopped", "quit"]
+  },
+  {
+    "indonesian": "berada",
+    "english": ["is", "am", "at"]
+  },
+  {
+    "indonesian": "berjalan",
+    "english": ["walks", "walking", "go"]
+  },
+  {
+    "indonesian": "berhasil",
+    "english": ["success", "succeeding", "successfully"]
+  },
+  {
+    "indonesian": "karena",
+    "english": ["because", "because of", "for"]
+  },
+  {
+    "indonesian": "ketika",
+    "english": ["while", "as", "at"]
+  },
+  {
+    "indonesian": "jadi",
+    "english": ["is", "become", "getting"]
+  },
+  {
+    "indonesian": "namun",
+    "english": ["however", "but"]
+  },
+  {
+    "indonesian": "atau",
+    "english": ["or", "nor", "alternatively"]
+  },
+  {
+    "indonesian": "yang",
+    "english": ["is", "am", "that"]
+  },
+  {
+    "indonesian": "tapi",
+    "english": ["but"]
+  },
+  {
+    "indonesian": "syal",
+    "english": ["scarf", "shawl", "scarves"]
+  },
+  {
+    "indonesian": "memakai",
+    "english": ["wears", "wearing", "wear"]
+  },
+  {
+    "indonesian": "kaus",
+    "english": ["t-shirt", "t-shirts"]
+  },
+  {
+    "indonesian": "topi",
+    "english": ["hat", "cap", "hats"]
+  },
+  {
+    "indonesian": "dasi",
+    "english": ["tie", "necktie"]
+  },
+  {
+    "indonesian": "sarung tangan",
+    "english": ["glove", "gloves"]
+  },
+  {
+    "indonesian": "kaus kaki",
+    "english": ["Socks", "sock"]
+  },
+  {
+    "indonesian": "membawa",
+    "english": ["takes", "take", "transport"]
+  },
+  {
+    "indonesian": "rok",
+    "english": ["skirt", "skirts"]
+  },
+  {
+    "indonesian": "sabuk",
+    "english": ["belt", "belts"]
+  },
+  {
+    "indonesian": "kemeja",
+    "english": ["shirt", "shirts"]
+  },
+  {
+    "indonesian": "mantel",
+    "english": ["coat"]
+  },
+  {
+    "indonesian": "jaket",
+    "english": ["jackets", "jacket", "sweatshirt"]
+  },
+  {
+    "indonesian": "payung",
+    "english": ["umbrella", "umbrellas"]
+  },
+  {
+    "indonesian": "sepatu",
+    "english": ["shoes", "shoe"]
+  },
+  {
+    "indonesian": "kantong",
+    "english": ["pockets", "pocket", "bag's"]
+  },
+  {
+    "indonesian": "membeli",
+    "english": ["get", "purchasing", "buying"]
+  },
+  {
+    "indonesian": "tas",
+    "english": ["bag", "bags", "bag's"]
+  },
+  {
+    "indonesian": "dompet",
+    "english": ["wallet", "wallets", "purse"]
+  },
+  {
+    "indonesian": "pakaian",
+    "english": ["clothing", "outfit", "outfits"]
+  },
+  {
+    "indonesian": "celana",
+    "english": ["pants", "trousers"]
+  },
+  {
+    "indonesian": "pensil",
+    "english": ["pencils", "pencil"]
+  },
+  {
+    "indonesian": "anjing",
+    "english": ["dog", "dogs", "dogs'"]
+  },
+  {
+    "indonesian": "bola",
+    "english": ["football", "ball", "soccer"]
+  },
+  {
+    "indonesian": "milik",
+    "english": ["belongs", "one's", "brother's"]
+  },
+  {
+    "indonesian": "tinggal",
+    "english": ["stay", "live", "stayed"]
+  },
+  {
+    "indonesian": "bisa",
+    "english": ["able", "can", "to be able to"]
+  },
+  {
+    "indonesian": "mulai",
+    "english": ["starting", "begun", "begin"]
+  },
+  {
+    "indonesian": "selesai",
+    "english": ["done", "finished", "end"]
+  },
+  {
+    "indonesian": "tidur",
+    "english": ["falls asleep", "sleeping", "sleep"]
+  },
+  {
+    "indonesian": "lupa",
+    "english": ["forgotten", "forget", "forgets"]
+  },
+  {
+    "indonesian": "ingat",
+    "english": ["remember"]
+  },
+  {
+    "indonesian": "jatuh",
+    "english": ["fallen", "fall", "fell"]
+  },
+  {
+    "indonesian": "kembali",
+    "english": ["return", "come back", "again"]
+  },
+  {
+    "indonesian": "masuk",
+    "english": ["entry", "entering", "included"]
+  },
+  {
+    "indonesian": "keluar",
+    "english": ["out", "came out", "go out"]
+  },
+  {
+    "indonesian": "duduk",
+    "english": ["sitting", "seated", "sits"]
+  },
+  {
+    "indonesian": "muncul",
+    "english": ["show up", "appear", "appears"]
+  },
+  {
+    "indonesian": "setujun",
+    "english": ["agrees", "agree", "agreeing"]
+  },
+  {
+    "indonesian": "datang",
+    "english": ["arrives", "arrive", "comes"]
+  },
+  {
+    "indonesian": "toko",
+    "english": ["shop", "store's", "store"]
+  },
+  {
+    "indonesian": "situ",
+    "english": ["there"]
+  },
+  {
+    "indonesian": "bank",
+    "english": ["bank", "the bank", "bank's"]
+  },
+  {
+    "indonesian": "toilet",
+    "english": ["restroom", "kamar kecil", "bathroom"]
+  },
+  {
+    "indonesian": "pulang",
+    "english": ["go home", "come home", "be home"]
+  },
+  {
+    "indonesian": "sana",
+    "english": ["there"]
+  },
+  {
+    "indonesian": "pergi",
+    "english": ["away", "travel", "left"]
+  },
+  {
+    "indonesian": "hotel",
+    "english": ["hotel", "hotel's"]
+  },
+  {
+    "indonesian": "pasar",
+    "english": ["markets", "market", "market's"]
+  },
+  {
+    "indonesian": "gedung",
+    "english": ["building", "buildings", "building's"]
+  },
+  {
+    "indonesian": "ke",
+    "english": ["go", "into", "to"]
+  },
+  {
+    "indonesian": "sekolah",
+    "english": ["school", "school's"]
+  },
+  {
+    "indonesian": "rumah",
+    "english": ["mom's", "homes", "home"]
+  },
+  {
+    "indonesian": "sini",
+    "english": ["here"]
+  },
+  {
+    "indonesian": "dapur",
+    "english": ["stove's", "kitchens", "kitchen"]
+  },
+  {
+    "indonesian": "di",
+    "english": ["is", "be at", "at"]
+  },
+  {
+    "indonesian": "ada",
+    "english": ["is", "am", "were"]
+  },
+  {
+    "indonesian": "kecap",
+    "english": ["soy sauce", "sweet soy sauce", "soy"]
+  },
+  {
+    "indonesian": "es",
+    "english": ["ice", "iced"]
+  },
+  {
+    "indonesian": "sambal",
+    "english": ["chili sauce", "chilli sauce", "hot sauce"]
+  },
+  {
+    "indonesian": "bayar",
+    "english": ["pay", "pays", "pay for"]
+  },
+  {
+    "indonesian": "harga",
+    "english": ["price", "worth", "cost"]
+  },
+  {
+    "indonesian": "minta",
+    "english": ["ask for", "ask", "asking"]
+  },
+  {
+    "indonesian": "panas",
+    "english": ["heat", "hot"]
+  },
+  {
+    "indonesian": "cokelat",
+    "english": ["chocolate", "cocoa", "brown"]
+  },
+  {
+    "indonesian": "kacang",
+    "english": ["beans", "peanut", "nuts"]
+  },
+  {
+    "indonesian": "merica",
+    "english": ["pepper", "peppers"]
+  },
+  {
+    "indonesian": "pisang",
+    "english": ["banana", "bananas"]
+  },
+  {
+    "indonesian": "garam",
+    "english": ["salt"]
+  },
+  {
+    "indonesian": "roti",
+    "english": ["breads", "bread", "bread's"]
+  },
+  {
+    "indonesian": "gula",
+    "english": ["sugar"]
+  },
+  {
+    "indonesian": "kopi",
+    "english": ["coffee", "coffees"]
+  },
+  {
+    "indonesian": "sarapan",
+    "english": ["breakfast", "breakfasts"]
+  },
+  {
+    "indonesian": "kue",
+    "english": ["cookie", "cake", "cookies"]
+  },
+  {
+    "indonesian": "enak",
+    "english": ["delicious", "good (food)", "tasty"]
+  },
+  {
+    "indonesian": "manis",
+    "english": ["sweet", "sweetened"]
+  },
+  {
+    "indonesian": "teh",
+    "english": ["tea"]
+  },
+  {
+    "indonesian": "tomat",
+    "english": ["tomato", "tomatoes"]
+  },
+  {
+    "indonesian": "telur",
+    "english": ["egg", "eggs"]
+  },
+  {
+    "indonesian": "stroberi",
+    "english": ["strawberry", "strawberries"]
+  },
+  {
+    "indonesian": "tahu",
+    "english": ["knows", "know", "knew"]
+  },
+  {
+    "indonesian": "jus",
+    "english": ["juice"]
+  },
+  {
+    "indonesian": "tempe",
+    "english": ["tempeh", "tempehs"]
+  },
+  {
+    "indonesian": "makanan",
+    "english": ["dish", "food", "meal"]
+  },
+  {
+    "indonesian": "sup",
+    "english": ["soup"]
+  },
+  {
+    "indonesian": "minuman",
+    "english": ["beverage", "drinks", "beverages"]
+  },
+  {
+    "indonesian": "daging",
+    "english": ["meat"]
+  },
+  {
+    "indonesian": "pesan",
+    "english": ["ordered", "orders", "order"]
+  },
+  {
+    "indonesian": "restoran",
+    "english": ["restaurants", "restaurant", "restaurant's"]
+  },
+  {
+    "indonesian": "nasi",
+    "english": ["rice"]
+  },
+  {
+    "indonesian": "ayam",
+    "english": ["chickens", "chicken", "chicken's"]
+  },
+  {
+    "indonesian": "goreng",
+    "english": ["fry", "fried"]
+  },
+  {
+    "indonesian": "dengan",
+    "english": ["with", "about", "to"]
+  },
+  {
+    "indonesian": "salam",
+    "english": ["greetings", "regards", "greeting"]
+  },
+  {
+    "indonesian": "sampai jumpa lagi",
+    "english": ["see you again", "until we meet again"]
+  },
+  {
+    "indonesian": "selamat malam",
+    "english": ["good night", "good evening"]
+  },
+  {
+    "indonesian": "selamat sore",
+    "english": ["good afternoon", "good evening", "good day"]
+  },
+  {
+    "indonesian": "terima terima kasih banyak",
+    "english": ["thank you very much"]
+  },
+  {
+    "indonesian": "waalaikumsalam",
+    "english": ["greetings to you, too"]
+  },
+  {
+    "indonesian": "selamat siang",
+    "english": ["Good afternoon"]
+  },
+  {
+    "indonesian": "permisi",
+    "english": ["sorry", "excuse me"]
+  },
+  {
+    "indonesian": "selamat tinggal",
+    "english": ["bye", "goodbye"]
+  },
+  {
+    "indonesian": "assalamualaikum",
+    "english": ["greetings", "greetings to you"]
+  },
+  {
+    "indonesian": "sampai jumpa",
+    "english": ["see you", "bye", "goodbye"]
+  },
+  {
+    "indonesian": "selamat datang",
+    "english": ["welcome"]
+  },
+  {
+    "indonesian": "sama-sama",
+    "english": ["you are welcome"]
+  },
+  {
+    "indonesian": "selamat jalan",
+    "english": ["goodbye", "bye"]
+  },
+  {
+    "indonesian": "ya",
+    "english": ["right", "please", "yes"]
+  },
+  {
+    "indonesian": "terima kasih",
+    "english": ["thanks", "thank you"]
+  },
+  {
+    "indonesian": "maaf",
+    "english": ["sorry", "excuse me"]
+  },
+  {
+    "indonesian": "silakan",
+    "english": ["please", "go ahead"]
+  },
+  {
+    "indonesian": "selamat pagi",
+    "english": ["good morning"]
+  },
+  {
+    "indonesian": "tidak",
+    "english": ["neither", "haven't", "do not"]
+  },
+  {
+    "indonesian": "besar",
+    "english": ["grand", "large", "great"]
+  },
+  {
+    "indonesian": "ia",
+    "english": ["it", "he", "she"]
+  },
+  {
+    "indonesian": "kaya",
+    "english": ["wealthy", "rich"]
+  },
+  {
+    "indonesian": "kami",
+    "english": ["we", "we're", "us"]
+  },
+  {
+    "indonesian": "gaun",
+    "english": ["dresses", "dress", "gown"]
+  },
+  {
+    "indonesian": "kalian",
+    "english": ["your", "you (plural)", "you"]
+  },
+  {
+    "indonesian": "anda",
+    "english": ["your", "you", "you're"]
+  },
+  {
+    "indonesian": "ini",
+    "english": ["this", "the", "that"]
+  },
+  {
+    "indonesian": "mereka",
+    "english": ["they", "their", "them"]
+  },
+  {
+    "indonesian": "koran",
+    "english": ["newspapers", "newspaper", "newspaper's"]
+  },
+  {
+    "indonesian": "menu",
+    "english": ["menu", "the menu", "menus"]
+  },
+  {
+    "indonesian": "membaca",
+    "english": ["read", "reading", "reads"]
+  },
+  {
+    "indonesian": "surat",
+    "english": ["letters", "mail", "letter"]
+  },
+  {
+    "indonesian": "menulis",
+    "english": ["writing", "write", "to write"]
+  },
+  {
+    "indonesian": "aku",
+    "english": ["I", "me", "my"]
+  },
+  {
+    "indonesian": "buku",
+    "english": ["book", "textbook", "books"]
+  },
+  {
+    "indonesian": "kita",
+    "english": ["let's", "we", "we're"]
+  },
+  {
+    "indonesian": "berapa",
+    "english": ["how many", "what", "how"]
+  },
+  {
+    "indonesian": "umur",
+    "english": ["age", "old"]
+  },
+  {
+    "indonesian": "tahun",
+    "english": ["years", "years'", "year"]
+  },
+  {
+    "indonesian": "dua puluh",
+    "english": ["twenty", "20", "20 in quantity"]
+  },
+  {
+    "indonesian": "sepuluh",
+    "english": ["ten", "ten in number", "10"]
+  },
+  {
+    "indonesian": "jepang",
+    "english": ["Japan", "Japanese", "japan's"]
+  },
+  {
+    "indonesian": "mana",
+    "english": ["where", "where are", "which"]
+  },
+  {
+    "indonesian": "jakarta",
+    "english": ["Jakarta"]
+  },
+  {
+    "indonesian": "bali",
+    "english": ["Bali"]
+  },
+  {
+    "indonesian": "bukan",
+    "english": ["neither", "wasn't", "no"]
+  },
+  {
+    "indonesian": "dari",
+    "english": ["with", "off", "than"]
+  },
+  {
+    "indonesian": "andi",
+    "english": ["Andi", "andi's"]
+  },
+  {
+    "indonesian": "nama",
+    "english": ["name", "names", "name's"]
+  },
+  {
+    "indonesian": "tini",
+    "english": ["Tini", "tini's"]
+  },
+  {
+    "indonesian": "apa kabar",
+    "english": ["how are you"]
+  },
+  {
+    "indonesian": "halo",
+    "english": ["Hello", "Hi", "greetings"]
+  },
+  {
+    "indonesian": "siapa",
+    "english": ["whom", "who", "what"]
+  },
+  {
+    "indonesian": "merah",
+    "english": ["red"]
+  },
+  {
+    "indonesian": "hitam",
+    "english": ["black"]
+  },
+  {
+    "indonesian": "kucing",
+    "english": ["kitty", "cat", "cats"]
+  },
+  {
+    "indonesian": "kuat",
+    "english": ["strong", "powerful"]
+  },
+  {
+    "indonesian": "putih",
+    "english": ["white", "white's"]
+  },
+  {
+    "indonesian": "dia",
+    "english": ["she", "her", "he's"]
+  },
+  {
+    "indonesian": "dan",
+    "english": ["and"]
+  },
+  {
+    "indonesian": "susu",
+    "english": ["milk"]
+  },
+  {
+    "indonesian": "air",
+    "english": ["stream's", "water", "water's"]
+  },
+  {
+    "indonesian": "kamu",
+    "english": ["your", "you", "you're"]
+  },
+  {
+    "indonesian": "punya",
+    "english": ["belongs", "ve", "one's"]
+  },
+  {
+    "indonesian": "minum",
+    "english": ["to drink", "drinks", "drink"]
+  },
+  {
+    "indonesian": "itu",
+    "english": ["it's", "the", "that"]
+  },
+  {
+    "indonesian": "apel",
+    "english": ["apple", "apples", "(an) apple"]
+  },
+  {
+    "indonesian": "saya",
+    "english": ["I", "me", "my"]
+  },
+  {
+    "indonesian": "suka",
+    "english": ["like", "loves", "likes"]
+  },
+  {
+    "indonesian": "makan",
+    "english": ["eats", "eaten", "am eating"]
+  },
+  {
+    "indonesian": "jeruk",
+    "english": ["an orange", "oranges", "orange"]
+  },
+  {
+    "indonesian": "mau",
+    "english": ["want", "wants", "wish"]
   }
 ]

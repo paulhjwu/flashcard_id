@@ -6,5 +6,9 @@ contextBridge.exposeInMainWorld('env', {
 
 contextBridge.exposeInMainWorld('electronAudio', {
     saveAudioFile: (relativePath, byteArray) =>
-        ipcRenderer.invoke('save-audio-file', { relativePath, byteArray })
+        ipcRenderer.invoke('save-audio-file', { relativePath, byteArray }),
+    generateTtsAudio: (text) =>
+        ipcRenderer.invoke('generate-tts-audio', text),
+    generateTtsBytes: (text, speakingRate) =>
+        ipcRenderer.invoke('generate-tts-bytes', { text, speakingRate })
 });

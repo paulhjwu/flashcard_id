@@ -10,6 +10,7 @@
     "electron": "^35.0.0"
   },
   "dependencies": {
+    "@google-cloud/text-to-speech": "^6.4.1",
     "dotenv": "^17.4.2"
   }
 }

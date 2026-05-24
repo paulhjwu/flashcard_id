@@ -109,48 +109,9 @@ function pcm16ToWav(pcmBytes, sampleRate) {
 }
 
 async function generateAndStoreGeminiAudio(indonesianText) {
-    const apiKey = getGeminiKey();
-    if (!apiKey) throw new Error('GEMINI_API_KEY is not set in .env');
-    if (!window.electronAudio?.saveAudioFile) throw new Error('Electron audio bridge is unavailable');
-
-    const response = await fetch(
-        `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-tts:generateContent?key=${encodeURIComponent(apiKey)}`,
-        {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({
-                contents: [{ parts: [{ text: indonesianText }] }],
-                generationConfig: {
-                    responseModalities: ['AUDIO'],
-                    speechConfig: {
-                        voiceConfig: {
-                            prebuiltVoiceConfig: { voiceName: 'Aoede' }
-                        }
-                    }
-                }
-            })
-        }
-    );
-
-    if (!response.ok) {
-        const errData = await response.json().catch(() => null);
-        throw new Error(errData?.error?.message || `Gemini TTS HTTP ${response.status}`);
-    }
-
-    const data = await response.json();
-    const inlineData = extractGeminiInlineAudio(data);
-
-    const binary = atob(inlineData.data);
-    const pcmBytes = new Uint8Array(binary.length);
-    for (let i = 0; i < binary.length; i++) pcmBytes[i] = binary.charCodeAt(i);
-
-    const rateMatch = (inlineData.mimeType || '').match(/rate=(\d+)/);
-    const sampleRate = rateMatch ? parseInt(rateMatch[1]) : 24000;
-
-    const wavBytes = pcm16ToWav(pcmBytes, sampleRate);
-    const wavFile = getAudioFilenameWav(indonesianText);
-    await window.electronAudio.saveAudioFile(wavFile, Array.from(wavBytes));
-    return wavFile;
+    if (!window.electronAudio?.generateTtsAudio) throw new Error('TTS IPC bridge is unavailable');
+    const { relativePath } = await window.electronAudio.generateTtsAudio(indonesianText);
+    return relativePath;
 }
 
 function tryLoadAudio(filePath) {
@@ -181,7 +142,7 @@ async function playAudio() {
     try {
         audio = await tryLoadAudio(mp3File).catch(() =>
             tryLoadAudio(wavFile).catch(async () => {
-                console.warn(`Audio missing for ${currentWord.indonesian}. Generating with Gemini TTS...`);
+                console.warn(`Audio missing for ${currentWord.indonesian}. Generating with Google TTS...`);
                 const generated = await generateAndStoreGeminiAudio(currentWord.indonesian);
                 return tryLoadAudio(generated);
             })
@@ -273,6 +234,7 @@ English: [The English translation here]`;
                 <div class="sentence-indonesian">🇮🇩 ${indoSentence}</div>
                 ${engTranslation ? `<div class="sentence-english">🇬🇧 ${engTranslation}</div>` : ''}
                 <button class="play-sentence-button" data-sentence="${indoSentence.replace(/"/g, '&quot;')}" onclick="speakSentence(this.dataset.sentence)">🔊 Play Sentence</button>
+                <button class="play-sentence-button" data-sentence="${indoSentence.replace(/"/g, '&quot;')}" onclick="speakSentenceSlow(this.dataset.sentence)">🐢 Play Slow</button>
             `;
             sentenceDiv.classList.add('show');
         }
@@ -287,7 +249,32 @@ English: [The English translation here]`;
 
 async function speakSentence(sentence) {
     if (!sentence) return;
-    await speakWithGeminiTTS(sentence);
+    await speakWithGoogleTTS(sentence, 1.0);
+}
+
+async function speakSentenceSlow(sentence) {
+    if (!sentence) return;
+    await speakWithGoogleTTS(sentence, 0.7);
+}
+
+async function speakWithGoogleTTS(sentence, rate) {
+    if (!window.electronAudio?.generateTtsBytes) {
+        console.error('[Google TTS] IPC bridge unavailable');
+        return;
+    }
+    try {
+        const { audioBase64 } = await window.electronAudio.generateTtsBytes(sentence, rate);
+        const binary = atob(audioBase64);
+        const bytes = new Uint8Array(binary.length);
+        for (let i = 0; i < binary.length; i++) bytes[i] = binary.charCodeAt(i);
+        const blob = new Blob([bytes], { type: 'audio/mpeg' });
+        const url = URL.createObjectURL(blob);
+        const a = new Audio(url);
+        a.addEventListener('ended', () => URL.revokeObjectURL(url), { once: true });
+        await a.play();
+    } catch (error) {
+        console.error('[Google TTS] Error:', error);
+    }
 }
 
 async function speakWithGeminiTTS(sentence) {

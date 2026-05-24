@@ -3,6 +3,11 @@ require('dotenv').config();
 const { app, BrowserWindow, ipcMain } = require('electron');
 const fs = require('fs');
 const path = require('path');
+const { TextToSpeechClient } = require('@google-cloud/text-to-speech');
+
+const ttsClient = new TextToSpeechClient({
+    keyFilename: path.resolve(__dirname, process.env.GOOGLE_APPLICATION_CREDENTIALS || '')
+});
 
 // Required for speech synthesis on Linux
 if (process.platform === 'linux') {
@@ -32,6 +37,35 @@ app.whenReady().then(() => {
 
 app.on('window-all-closed', () => {
     if (process.platform !== 'darwin') app.quit();
+});
+
+ipcMain.handle('generate-tts-bytes', async (_, { text, speakingRate }) => {
+    if (typeof text !== 'string' || !text.trim()) throw new Error('Invalid TTS text');
+
+    const [response] = await ttsClient.synthesizeSpeech({
+        input: { text },
+        voice: { languageCode: 'id-ID', ssmlGender: 'NEUTRAL' },
+        audioConfig: { audioEncoding: 'MP3', speakingRate: speakingRate || 1.0 }
+    });
+
+    return { audioBase64: response.audioContent.toString('base64') };
+});
+
+ipcMain.handle('generate-tts-audio', async (_, text) => {
+    if (typeof text !== 'string' || !text.trim()) throw new Error('Invalid TTS text');
+
+    const [response] = await ttsClient.synthesizeSpeech({
+        input: { text },
+        voice: { languageCode: 'id-ID', ssmlGender: 'NEUTRAL' },
+        audioConfig: { audioEncoding: 'MP3' }
+    });
+
+    const filename = text.replace(/ /g, '_') + '.mp3';
+    const resolvedPath = path.join(__dirname, 'indonesian_audio', filename);
+    await fs.promises.mkdir(path.join(__dirname, 'indonesian_audio'), { recursive: true });
+    await fs.promises.writeFile(resolvedPath, response.audioContent);
+
+    return { relativePath: 'indonesian_audio/' + filename };
 });
 
 ipcMain.handle('save-audio-file', async (_, payload) => {
