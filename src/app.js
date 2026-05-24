@@ -63,90 +63,136 @@ function getAudioFilename(indonesianText) {
     return 'indonesian_audio/' + indonesianText.replace(/ /g, '_') + '.mp3';
 }
 
-async function generateAndStoreWordAudio(indonesianText) {
-    const apiKey = getGeminiKey();
-    if (!apiKey) {
-        throw new Error('GEMINI_API_KEY is not set in .env');
-    }
-    if (!window.electronAudio?.saveAudioFile) {
-        throw new Error('Electron audio bridge is unavailable');
-    }
+function getAudioFilenameWav(indonesianText) {
+    return 'indonesian_audio/' + indonesianText.replace(/ /g, '_') + '.wav';
+}
 
-    const ttsResponse = await fetch(
-        `https://texttospeech.googleapis.com/v1/text:synthesize?key=${encodeURIComponent(apiKey)}`,
+function extractGeminiInlineAudio(data) {
+    const parts = data.candidates?.[0]?.content?.parts || [];
+    const inlineData = parts.find(p => p.inlineData?.data)?.inlineData;
+    if (!inlineData?.data) {
+        const blockReason = data.promptFeedback?.blockReason;
+        const finishReason = data.candidates?.[0]?.finishReason;
+        console.error('[Gemini TTS] Unexpected response:', JSON.stringify(data).slice(0, 500));
+        throw new Error(
+            blockReason ? `Gemini TTS blocked: ${blockReason}` :
+            finishReason ? `Gemini TTS finished with reason: ${finishReason}` :
+            'No audio data in Gemini TTS response'
+        );
+    }
+    return inlineData;
+}
+
+function writeStringDataView(view, offset, str) {
+    for (let i = 0; i < str.length; i++) view.setUint8(offset + i, str.charCodeAt(i));
+}
+
+function pcm16ToWav(pcmBytes, sampleRate) {
+    const dataSize = pcmBytes.length;
+    const buffer = new ArrayBuffer(44 + dataSize);
+    const view = new DataView(buffer);
+    writeStringDataView(view, 0, 'RIFF');
+    view.setUint32(4, 36 + dataSize, true);
+    writeStringDataView(view, 8, 'WAVE');
+    writeStringDataView(view, 12, 'fmt ');
+    view.setUint32(16, 16, true);
+    view.setUint16(20, 1, true);
+    view.setUint16(22, 1, true);
+    view.setUint32(24, sampleRate, true);
+    view.setUint32(28, sampleRate * 2, true);
+    view.setUint16(32, 2, true);
+    view.setUint16(34, 16, true);
+    writeStringDataView(view, 36, 'data');
+    view.setUint32(40, dataSize, true);
+    new Uint8Array(buffer).set(pcmBytes, 44);
+    return new Uint8Array(buffer);
+}
+
+async function generateAndStoreGeminiAudio(indonesianText) {
+    const apiKey = getGeminiKey();
+    if (!apiKey) throw new Error('GEMINI_API_KEY is not set in .env');
+    if (!window.electronAudio?.saveAudioFile) throw new Error('Electron audio bridge is unavailable');
+
+    const response = await fetch(
+        `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-tts:generateContent?key=${encodeURIComponent(apiKey)}`,
         {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
-                input: { text: indonesianText },
-                voice: {
-                    languageCode: 'id-ID',
-                    name: 'id-ID-Wavenet-A'
-                },
-                audioConfig: {
-                    audioEncoding: 'MP3'
+                contents: [{ parts: [{ text: indonesianText }] }],
+                generationConfig: {
+                    responseModalities: ['AUDIO'],
+                    speechConfig: {
+                        voiceConfig: {
+                            prebuiltVoiceConfig: { voiceName: 'Aoede' }
+                        }
+                    }
                 }
             })
         }
     );
 
-    if (!ttsResponse.ok) {
-        const errData = await ttsResponse.json().catch(() => null);
-        throw new Error(errData?.error?.message || `Google TTS HTTP ${ttsResponse.status}`);
+    if (!response.ok) {
+        const errData = await response.json().catch(() => null);
+        throw new Error(errData?.error?.message || `Gemini TTS HTTP ${response.status}`);
     }
 
-    const ttsData = await ttsResponse.json();
-    if (!ttsData?.audioContent) {
-        throw new Error('Google TTS returned no audio data');
-    }
+    const data = await response.json();
+    const inlineData = extractGeminiInlineAudio(data);
 
-    const binary = atob(ttsData.audioContent);
-    const bytes = new Uint8Array(binary.length);
-    for (let i = 0; i < binary.length; i++) {
-        bytes[i] = binary.charCodeAt(i);
-    }
+    const binary = atob(inlineData.data);
+    const pcmBytes = new Uint8Array(binary.length);
+    for (let i = 0; i < binary.length; i++) pcmBytes[i] = binary.charCodeAt(i);
 
-    const audioFile = getAudioFilename(indonesianText);
-    await window.electronAudio.saveAudioFile(audioFile, Array.from(bytes));
-    return audioFile;
+    const rateMatch = (inlineData.mimeType || '').match(/rate=(\d+)/);
+    const sampleRate = rateMatch ? parseInt(rateMatch[1]) : 24000;
+
+    const wavBytes = pcm16ToWav(pcmBytes, sampleRate);
+    const wavFile = getAudioFilenameWav(indonesianText);
+    await window.electronAudio.saveAudioFile(wavFile, Array.from(wavBytes));
+    return wavFile;
+}
+
+function tryLoadAudio(filePath) {
+    return new Promise((resolve, reject) => {
+        const a = new Audio();
+        a.addEventListener('canplay', () => resolve(a), { once: true });
+        a.addEventListener('error', () => reject(new Error(`Cannot load: ${filePath}`)), { once: true });
+        a.src = filePath;
+    });
 }
 
 function getRandomWord() {
     return words[Math.floor(Math.random() * words.length)];
 }
 
-function playAudio() {
+async function playAudio() {
     if (!currentWord) return;
-
-    const initialAudioFile = getAudioFilename(currentWord.indonesian);
 
     if (audio) {
         audio.pause();
         audio.currentTime = 0;
+        audio = null;
     }
 
-    fetch(initialAudioFile, { method: 'HEAD' })
-        .then(async response => {
-            if (response.ok) {
-                return initialAudioFile;
-            }
-            console.warn(`Audio missing for ${currentWord.indonesian}. Generating and caching...`);
-            return await generateAndStoreWordAudio(currentWord.indonesian);
-        })
-        .then(audioFile => {
-            audio = new Audio(audioFile);
-            audio.onerror = (e) => {
-                console.error('Audio error:', e);
-                alert(`Failed to play audio: ${audioFile}`);
-            };
-            return audio.play();
-        })
-        .then(() => showTranslation())
-        .catch(error => {
-            console.error('Error:', error);
-            alert(error.message || 'Error playing audio.');
-            showTranslation();
-        });
+    const mp3File = getAudioFilename(currentWord.indonesian);
+    const wavFile = getAudioFilenameWav(currentWord.indonesian);
+
+    try {
+        audio = await tryLoadAudio(mp3File).catch(() =>
+            tryLoadAudio(wavFile).catch(async () => {
+                console.warn(`Audio missing for ${currentWord.indonesian}. Generating with Gemini TTS...`);
+                const generated = await generateAndStoreGeminiAudio(currentWord.indonesian);
+                return tryLoadAudio(generated);
+            })
+        );
+        await audio.play();
+        showTranslation();
+    } catch (error) {
+        console.error('Error:', error);
+        alert(error.message || 'Error playing audio.');
+        showTranslation();
+    }
 }
 
 function showTranslation() {
@@ -275,8 +321,7 @@ async function speakWithGeminiTTS(sentence) {
             throw new Error(errData?.error?.message || `Gemini TTS HTTP ${response.status}`);
         }
         const data = await response.json();
-        const inlineData = data.candidates?.[0]?.content?.parts?.[0]?.inlineData;
-        if (!inlineData?.data) throw new Error('No audio data in Gemini TTS response');
+        const inlineData = extractGeminiInlineAudio(data);
 
         const binaryStr = atob(inlineData.data);
         const bytes = new Uint8Array(binaryStr.length);

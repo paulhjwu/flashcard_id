@@ -40,8 +40,8 @@ ipcMain.handle('save-audio-file', async (_, payload) => {
     if (typeof relativePath !== 'string' || !relativePath.startsWith('indonesian_audio/')) {
         throw new Error('Invalid audio path');
     }
-    if (!relativePath.endsWith('.mp3')) {
-        throw new Error('Audio file must be MP3');
+    if (!relativePath.endsWith('.mp3') && !relativePath.endsWith('.wav')) {
+        throw new Error('Audio file must be MP3 or WAV');
     }
     if (!Array.isArray(byteArray)) {
         throw new Error('Invalid audio payload');
