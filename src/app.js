@@ -1,6 +1,7 @@
 let words = [];
 let currentWord = null;
 let audio = null;
+let englishSearchMatches = [];
 
 function getGeminiKey() {
     return window.env?.GEMINI_API_KEY || '';
@@ -116,6 +117,82 @@ function tryLoadAudio(filePath) {
 
 function getRandomWord() {
     return words[Math.floor(Math.random() * words.length)];
+}
+
+function normalizeText(text) {
+    return String(text || '').toLowerCase();
+}
+
+function getEnglishVariants(wordObj) {
+    if (Array.isArray(wordObj?.english)) return wordObj.english.map(String);
+    if (typeof wordObj?.english === 'string') return [wordObj.english];
+    return [];
+}
+
+function englishMatchesQuery(wordObj, query) {
+    const normalizedQuery = normalizeText(query).trim();
+    if (!normalizedQuery) return false;
+
+    return getEnglishVariants(wordObj).some((variant) =>
+        normalizeText(variant).includes(normalizedQuery)
+    );
+}
+
+function renderEnglishSearchResults(matches, query) {
+    const dropdown = document.getElementById('englishSearchDropdown');
+    const countEl = document.getElementById('englishSearchCount');
+    if (!dropdown || !countEl) return;
+
+    if (!query.trim()) {
+        dropdown.innerHTML = '<option value="">Type above to search...</option>';
+        dropdown.disabled = true;
+        countEl.textContent = '';
+        englishSearchMatches = [];
+        return;
+    }
+
+    if (matches.length === 0) {
+        countEl.textContent = 'No Indonesian matches found.';
+        dropdown.innerHTML = '<option value="">No matches</option>';
+        dropdown.disabled = true;
+        englishSearchMatches = [];
+        return;
+    }
+
+    countEl.textContent = `${matches.length} match${matches.length === 1 ? '' : 'es'} found`;
+    dropdown.innerHTML = [
+        '<option value="">Select an Indonesian word...</option>',
+        ...matches.map((word, index) => {
+            const englishLabel = getEnglishVariants(word).join(', ');
+            return `<option value="${index}">${word.indonesian} - ${englishLabel}</option>`;
+        })
+    ].join('');
+    dropdown.disabled = false;
+
+    englishSearchMatches = matches;
+}
+
+function handleEnglishDropdownSelect(value) {
+    if (value === '') return;
+    const index = Number(value);
+    const selectedWord = englishSearchMatches[index];
+    if (!selectedWord) return;
+
+    const cueInput = document.getElementById('cueWordInput');
+    if (cueInput) cueInput.value = selectedWord.indonesian;
+    showWord(selectedWord);
+    hideCueWordError();
+}
+
+function handleEnglishSearchInput(inputValue) {
+    const query = inputValue || '';
+    if (!query.trim()) {
+        renderEnglishSearchResults([], '');
+        return;
+    }
+
+    const matches = words.filter((word) => englishMatchesQuery(word, query));
+    renderEnglishSearchResults(matches, query);
 }
 
 async function playAudio() {
@@ -328,11 +405,12 @@ async function speakWithGeminiTTS(sentence) {
 
 function showWord(wordObj) {
     currentWord = wordObj;
+    const englishDisplay = getEnglishVariants(currentWord).join(', ');
     document.getElementById('flashcard').innerHTML = `
         <div class="card">
             <div class="indonesian-word">${currentWord.indonesian}</div>
             <div id="english-translation" class="english-translation">
-                ${currentWord.english}
+                ${englishDisplay}
             </div>
             <div id="sentence-section" class="sentence-section"></div>
         </div>
@@ -391,4 +469,5 @@ function hideCueWordError() {
 
 window.addEventListener('DOMContentLoaded', () => {
     loadWords();
+    englishSearchMatches = [];
 });

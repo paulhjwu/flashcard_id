@@ -16,6 +16,16 @@
                    oninput="handleCueWordInput(this.value)">
             <div id="cueWordError" class="cue-word-error"></div>
         </div>
+        <div class="english-search-section">
+            <label for="englishWordInput">🔎 English Search</label>
+            <input type="text" id="englishWordInput" class="api-key-input"
+                   placeholder="Type an English word (e.g. eat)"
+                   oninput="handleEnglishSearchInput(this.value)">
+            <div id="englishSearchCount" class="search-result-count"></div>
+            <select id="englishSearchDropdown" class="search-result-dropdown" onchange="handleEnglishDropdownSelect(this.value)" disabled>
+                <option value="">Type above to search...</option>
+            </select>
+        </div>
         <div id="flashcard">
             <div class="loading">Loading flashcards...</div>
         </div>
